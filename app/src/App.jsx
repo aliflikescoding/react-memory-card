@@ -1,4 +1,5 @@
 import Header from "./sections/Header";
+import Footer from "./sections/Footer";
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
           Main Area
         </section>
         <section className="padding-x">
-          Footer
+          <Footer />
         </section>
       </main>
     </>
