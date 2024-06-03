@@ -4,6 +4,13 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
 @layer utilities {
   .padding-x {
     @apply sm:px-16 px-8;
