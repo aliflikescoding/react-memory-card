@@ -89,7 +89,8 @@ const MainArea = () => {
       {start ? 
         <>
           <div className="flex justify-center items-center flex-col">
-            <h1 className="text-2xl py-4">Current Score: {currentScore} Max Score : {maxScore}</h1>
+            <h1 className="text-2xl py-4">Current Score: {currentScore}</h1>
+            <h1 className="text-2xl py-4">Max Score : {maxScore}</h1>
             <Button label="Restart" className="py-4" backgroundColor="bg-error" clickEvent={handleRestartClick} iconComponent={<MdOutlineRestartAlt />}/>
           </div>
           { isLoading ?
