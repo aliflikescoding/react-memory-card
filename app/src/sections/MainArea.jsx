@@ -1,13 +1,48 @@
-import Button from "../Components/Button"
+import Button from "../Components/Button";
 import { FaPlayCircle } from "react-icons/fa";
+import { useEffect, useState } from "react";
 import InfoModal from "../Components/InfoModal";
+import MovieCard from "../Components/MovieCard";
 
 const MainArea = () => {
+  const [start, setStart] = useState(false);
+  const [movieList, setMovieList] = useState([]);
+
+  const getMovie = () => {
+    fetch("https://api.themoviedb.org/3/discover/movie?api_key=3cd7ce9c3d0c6c0b6e837006a8d21a1e")
+    .then(res => res.json())
+    .then(json => setMovieList(json.results)).catch(error => {
+      console.error('Error fetching movie data:', error);
+    });
+  }
+
+  const handleStartClick = () => {
+    setStart(true);
+  }
+
+  useEffect(() => {
+      if (start === true) {
+        getMovie();
+      }
+    }, [start])
+
   return (
-    <div className="flex flex-col justify-center items-center h-[89vh] sm:h-[79.7vh] overflow-y-auto font-bold">
-      <h1 className="text-6xl my-8">Play Now!</h1>
-      <Button label="Begin " iconComponent={<FaPlayCircle />}/>
-      <InfoModal />
+    <div className="h-[89vh] sm:h-[79.7vh] overflow-auto font-bold p-5">
+      {start ? 
+        <>
+          <div className="flex flex-wrap flex-1 justify-center">
+            {movieList.map((movie, index) => (
+              <MovieCard key={index} movieLink={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} movieTitle={movie.original_title}/>
+            ))}
+          </div>
+        </>
+        : 
+        <div className="flex flex-col justify-center items-center">
+          <h1 className="text-6xl my-8">Play Now!</h1>
+          <Button label="Begin " clickEvent={handleStartClick} iconComponent={<FaPlayCircle />}/>
+          <InfoModal />
+        </div>}
+      
     </div>
   )
 }
