@@ -7,6 +7,7 @@ const Button = ({
   textColor,
   borderColor,
   fullWidth,
+  clickEvent
 }) => {
   return (
     <MotionConfig
@@ -28,6 +29,7 @@ const Button = ({
         scale: 0.95,
         rotate: "2.5deg",
       }}
+      onClick={clickEvent}
       >
         {label}
         {iconComponent}
